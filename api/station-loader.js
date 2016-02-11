@@ -1,4 +1,4 @@
-var request = require("request");
+var request = require("./request-decorator");
 
 module.exports.getStation = function(stationName, callback) {
     var encoded = encodeURIComponent(stationName);
@@ -9,7 +9,7 @@ module.exports.getStation = function(stationName, callback) {
         encoding: "utf8"
     };
 
-    request.post(options, function(error, response, body) {
+    request.get(options, function(error, response, body) {
         var result = [];
 
         if (body && body.value && body.value.length > 0) {

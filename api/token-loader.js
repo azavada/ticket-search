@@ -42,8 +42,6 @@ function TokenLoader() {
     var request = require('request');
     var htmlParser = require('./html-parser');
     var SandCastle = require('sandcastle').SandCastle;
-//    require('request-debug')(request);
-
     var contextString = context.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1];
 
     function loadToken(script, callback) {
@@ -78,8 +76,6 @@ function TokenLoader() {
         var options = {
             url: "http://booking.uz.gov.ua/",
             encoding: 'utf8',
-            followAllRedirects: true,
-            followRedirects: true,
 
             headers: {
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
