@@ -1,14 +1,17 @@
-var loader = require('./token-loader');
-var interval = require('./token-interval');
+var TokenLoader = require('./token-loader');
+var TokenInterval = require('./token-interval');
 
-function tokenProvider() {
+function TokenProvider() {
+    var loader = new TokenLoader();
+    var interval = new TokenInterval();
+
     this.getToken = function(callback) {
         interval.addRoutine(function() {
             loader.load(function(token) {
-                console.log(token);
+                callback(token);
             });
         });
     }
 }
 
-module.exports = new tokenProvider().getToken();
+module.exports = TokenProvider;

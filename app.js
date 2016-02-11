@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var stationLoader = require('./api/StationLoader');
-require('./api/token-provider');
 
 var app = express();
 

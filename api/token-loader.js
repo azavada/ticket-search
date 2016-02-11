@@ -31,48 +31,58 @@ function context() {
         }
     };
 
-    this.localStorage = {
-        setItem : function(keyName, keyValue) {
-            var obj = {};
-            obj[keyName] = keyValue;
-            postMessage(obj);
+    localStorage.setItem = function(keyName, keyValue) {
+        if (keyName === 'gv-token') {
+            exit(keyValue);
         }
-    };
+    }
 }
 
-function tokenLoader() {
-    var cheerio = require('cheerio');
-    var sandbox = require("sandbox");
+function TokenLoader() {
     var request = require('request');
-    require('request-debug')(request);
+    var htmlParser = require('./html-parser');
+    var SandCastle = require('sandcastle').SandCastle;
+//    require('request-debug')(request);
 
     var contextString = context.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1];
 
-    function handleResponse(error, response, body, callback) {
-        var html = cheerio.load(body);
-        console.log("error", error);
-        console.log("body", body);
-        var script = html('script').get()[7].children[0].data;
-        var worker = new sandbox();
+    function loadToken(script, callback) {
+        var sandcastle = new SandCastle();
 
-        worker.run(contextString + script);
-        worker.on('message', function(message) {
-            console.log(message);
-            callback(message["gv-token"]);
+        var code = "exports.main = function() {"  + contextString + script + "}";
+        var worker = sandcastle.createScript(code);
+
+        worker.on('exit', function(err, output) {
+            if (!err) {
+                callback(output);
+            }
         });
+
+        worker.run({localStorage: {}});
+    }
+
+    function handleResponse(error, response, body, callback) {
+        if (!error && response.statusCode === 200) {
+
+            htmlParser.getScripts(body, function(scripts) {
+                if (scripts.length > 0) {
+                    var script = scripts[scripts.length - 1];
+                    loadToken(script, callback);
+                }
+            });
+
+        }
     }
 
     this.load = function(callback) {
         var options = {
             url: "http://booking.uz.gov.ua/",
-//            url: "http://localhost:56789/",
-            encoding: "utf8",
+            encoding: 'utf8',
             followAllRedirects: true,
             followRedirects: true,
 
             headers: {
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-                "Accept-Encoding": "gzip, deflate, sdch",
                 "Accept-Language": "en-US,en;q=0.8,uk;q=0.6",
                 "Cache-Control": "max-age=0",
                 "Connection": "keep-alive",
@@ -88,4 +98,4 @@ function tokenLoader() {
     }
 }
 
-module.exports = new tokenLoader();
+module.exports = TokenLoader;
