@@ -46,6 +46,7 @@ function TokenLoader() {
     var contextString = context.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1];
 
     function loadToken(script, callback) {
+        console.log("Script to execute", script);
         var sandcastle = new SandCastle();
 
         var code = "exports.main = function() {"  + contextString + script + "}";
@@ -54,6 +55,8 @@ function TokenLoader() {
         worker.on('exit', function(err, output) {
             if (!err) {
                 callback(output);
+            } else {
+                console.log(err);
             }
         });
 
