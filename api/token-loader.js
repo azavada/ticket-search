@@ -40,6 +40,7 @@ function context() {
 
 function TokenLoader() {
     var request = require('request');
+    require('request-debug')(request);
     var htmlParser = require('./html-parser');
     var SandCastle = require('sandcastle').SandCastle;
     var contextString = context.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1];

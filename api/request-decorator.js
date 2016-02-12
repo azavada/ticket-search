@@ -1,5 +1,5 @@
 var request = require('request');
-//require('request-debug')(request);
+require('request-debug')(request);
 
 var TokenProvider = require('./token-provider');
 var tokenProvider = new TokenProvider();
