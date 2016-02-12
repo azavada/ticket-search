@@ -5,12 +5,23 @@ function TokenProvider() {
     var loader = new TokenLoader();
     var interval = new TokenInterval();
 
-    this.getToken = function(callback) {
-        interval.addRoutine(function() {
-            loader.load(function(token) {
-                callback(token);
-            });
+    var token;
+    var callback = function(){};
+
+    interval.addRoutine(function () {
+        loader.load(function (tkn) {
+            token = tkn;
+            callback(token);
+            callback = function(){};
         });
+    });
+
+    this.getToken = function(func) {
+        if (typeof token === "undefined") {
+            callback = func;
+        } else {
+            func(token);
+        }
     }
 }
 

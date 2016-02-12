@@ -41,6 +41,8 @@ function context() {
 
 function TokenLoader() {
     var request = require('request');
+    require("request-debug")(request);
+
     var htmlParser = require('./html-parser');
     var SandCastle = require('sandcastle').SandCastle;
     var contextString = context.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1];
@@ -79,15 +81,20 @@ function TokenLoader() {
         var options = {
             url: "http://booking.uz.gov.ua/",
             encoding: 'utf8',
+            jar: true,
+            gzip: true,
 
             headers: {
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                 "Accept-Language": "en-US,en;q=0.8,uk;q=0.6",
-                "Cache-Control": "max-age=0",
+                "Cache-Control": "no-cache",
                 "Connection": "keep-alive",
                 "Host": "booking.uz.gov.ua",
-                "Upgrade-Insecure-Requests": 1,
-                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
+                "Pragma": "no-cache",
+                "Referer": "http://booking.uz.gov.ua/en/",
+                "Upgrade-Insecure-Requests": "1",
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)" +
+                    "Chrome/47.0.2526.106 Safari/537.36"
             }
         };
 
