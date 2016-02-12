@@ -1,4 +1,5 @@
 function context() {
+    var $$_;
     var $v = {
         rot13: function(){},
         domReady: function() {}
