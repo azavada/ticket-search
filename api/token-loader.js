@@ -41,13 +41,11 @@ function context() {
 
 function TokenLoader() {
     var request = require('request');
-    require('request-debug')(request);
     var htmlParser = require('./html-parser');
     var SandCastle = require('sandcastle').SandCastle;
     var contextString = context.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1];
 
     function loadToken(script, callback) {
-        console.log("Script to execute", script);
         var sandcastle = new SandCastle();
 
         var code = "exports.main = function() {"  + contextString + script + "}";
@@ -57,7 +55,7 @@ function TokenLoader() {
             if (!err) {
                 callback(output);
             } else {
-                console.log(err);
+                callback("");
             }
         });
 
