@@ -1,7 +1,16 @@
-doctype html
-html
-  head
-    title= title
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+append styles
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+
+append scripts
+    script(src="/lib/jquery-ui.min.js")
+
+block body
+    +navbar-fixed("Project name","navbar","inverse")
+        +nav_item("#","active") Home
+        +nav_item("#") About
+        +nav_item("#") Contact
+
+    .container
+        block content
