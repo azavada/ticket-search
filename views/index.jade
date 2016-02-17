@@ -1,7 +1,6 @@
 extends layout
 
 append scripts
-    script(src="/lib/select2/js/select2.full.js")
     script(src="/javascripts/index.js")
 
 block content
@@ -11,4 +10,4 @@ block content
         .form-group
             input#from.dropdown-toggle.form-control.input-lg(type='text', placeholder='Звідки', data-toggle="dropdown")
             input#to.form-control.input-lg(type='text', placeholder='Куди')
-            button.btn.btn-lg(type='button') Шукати
+            input#search.btn.btn-lg(type='button' value='Шукати')
