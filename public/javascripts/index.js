@@ -1,46 +1,15 @@
 $(function () {
-    function addAutoComplete(selector) {
-        var options = {
-            source: function (request, response) {
-                $.ajax({
-                    url: 'api/station/' + request.term
-                }).done(function (data) {
-                    var result = [];
-                    data.forEach(function (element) {
-                        result.push(element.title);
-                    });
-                    response(result);
-                });
-            },
-
-            appendTo: "body .container .form-group",
-            minLength: 2,
-            messages: {
-                noResults: '',
-                results: function () {
-                }
-            }
-        };
-
-        function renderItem(ul, item) {
-            return $("<li>")
-                .attr("data-value", item.value)
-                .addClass("input-lg")
-                .append(item.label)
-                .appendTo(ul);
-        }
-
-        $(selector)
-            .autocomplete(options)
-            .data('ui-autocomplete')
-            ._renderItem = renderItem
-    }
+    var autoComplete = new AutoComplete();
 
     function addSearchButtonHandler() {
         $("#search").on("click", function () {
+            var $from = $("#from");
+            var $to = $("#to");
             var query = $.param({
-                from: $("#from").val(),
-                to: $("#to").val(),
+                from_id: $from.attr("data-value"),
+                from_name: $from.val(),
+                to_id: $to.attr("data-value"),
+                to_name: $to.val(),
                 when: getTodayDate()
             });
 
@@ -54,7 +23,7 @@ $(function () {
 
     function getTodayDate() {
         var today = new Date();
-        var dd = today.getDate();
+        var dd = today.getDate() + 1;
         var mm = today.getMonth() + 1; //January is 0!
         var yyyy = today.getFullYear();
 
@@ -69,7 +38,8 @@ $(function () {
         return dd + "." + mm + "." + yyyy;
     }
 
-    addAutoComplete("#from");
-    addAutoComplete("#to");
+    autoComplete.add("#from");
+    autoComplete.add("#to");
+
     addSearchButtonHandler();
 });

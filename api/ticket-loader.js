@@ -11,34 +11,31 @@ function jsonToQueryString(json) {
 
 exports.findTickets = function(params, callback) {
     var request = require("./request-decorator");
-    var result = {};
 
-    if (params.from && params.to && params.when) {
-        var postData = {
-            station_id_from: params.from,
-            station_id_till: params.to,
-            date_dep: params.when,
-            time_dep: "00:00",
-            time_dep_till: "",
-            another_ec: "0",
-            search: ""
-        };
+    var postData = {
+        station_id_from: params.from_id,
+        station_id_till: params.to_id,
+        station_from: params.from_name,
+        station_till: params.to_name,
+        date_dep: params.when,
+        time_dep: "00:00",
+        time_dep_till: "",
+        another_ec: "0",
+        search: ""
+    };
 
-        var options = {
-            url: "http://booking.uz.gov.ua/purchase/search/",
-            json: true,
-            encoding: "utf8",
-            body: jsonToQueryString(postData)
-        };
+    var options = {
+        url: "http://booking.uz.gov.ua/purchase/search/",
+        json: true,
+        encoding: "utf8",
+        body: jsonToQueryString(postData)
+    };
 
-        request.post(options, function(error, response, body) {
-            if (!error && response.statusCode === 200) {
-                callback(body.value);
-            } else {
-                callback({});
-            }
-        });
-    } else {
-        callback(result);
-    }
+    request.post(options, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            callback(body.value);
+        } else {
+            callback({});
+        }
+    });
 };
