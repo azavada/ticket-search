@@ -11,7 +11,6 @@ function AutoComplete() {
     };
 
     function renderItem(ul, item) {
-        console.log(item);
         return $("<li>")
             .attr("data-value", item.value)
             .addClass("input-lg")

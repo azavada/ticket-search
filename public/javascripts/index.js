@@ -13,10 +13,23 @@ $(function () {
                 when: getTodayDate()
             });
 
+//            query = "from_id=2218000&from_name=%D0%9B%D1%8C%D0%B2%D1%96%D0%B2&" +
+//                "to_id=2200001&to_name=%D0%9A%D0%B8%D1%97%D0%B2&when=20.02.2016";
+
             $.ajax({
                 url: 'api/tickets?' + query
             }).done(function (data) {
-                console.log(data);
+
+                var table = $("tbody");
+                data.forEach(function(el) {
+                    var tr = $("<tr>").appendTo(table);
+                    $("<td>").append(el.num).appendTo(tr);
+                    $("<td>").append(el.from.station).appendTo(tr);
+                    $("<td>").append(el.till.station).appendTo(tr);
+                    $("<td>").append(el.from.src_date).appendTo(tr);
+                    $("<td>").append(el.till.src_date).appendTo(tr);
+                    $("<td>").append(el.travel_time).appendTo(tr);
+                });
             });
         });
     }

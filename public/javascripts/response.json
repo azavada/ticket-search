@@ -1,0 +1,55 @@
+[{
+    "num": "112Л",
+    "model": 0,
+    "category": 0,
+    "travel_time": "15:51",
+    "from": {
+        "station_id": "2218000",
+        "station": "Львів",
+        "date": 1455890700,
+        "src_date": "2016-02-19 16:05:00"
+    },
+    "till": {
+        "station_id": "2204580",
+        "station": "Харків-Пас",
+        "date": 1455947760,
+        "src_date": "2016-02-20 07:56:00"
+    },
+    "types": [{
+        "title": "Купе",
+        "letter": "К",
+        "places": 134
+    }, {
+        "title": "Плацкарт",
+        "letter": "П",
+        "places": 128
+    }],
+    "reserve_error": "reserve_24h"
+}, {
+    "num": "114Л",
+    "model": 0,
+    "category": 0,
+    "travel_time": "11:19",
+    "from": {
+        "station_id": "2218000",
+        "station": "Мукачеве",
+        "date": 1455897840,
+        "src_date": "2016-02-19 18:04:00"
+    },
+    "till": {
+        "station_id": "2204580",
+        "station": "Харків-Пас",
+        "date": 1455938580,
+        "src_date": "2016-02-20 05:23:00"
+    },
+    "types": [{
+        "title": "Люкс",
+        "letter": "Л",
+        "places": 13
+    }, {
+        "title": "Купе",
+        "letter": "К",
+        "places": 41
+    }],
+    "reserve_error": "reserve_24h"
+}]
