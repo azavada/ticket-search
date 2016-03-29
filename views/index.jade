@@ -1,24 +1,23 @@
 extends layout
 
-append scripts
-    script(src="/javascripts/index.js")
-    script(src="/javascripts/AutoComplete.js")
-
 block content
     h1=title
 
-    form
-        .form-group
-            input#from.dropdown-toggle.form-control.input-lg(type='text', placeholder='Звідки', data-toggle="dropdown")
-            input#to.form-control.input-lg(type='text', placeholder='Куди')
-            input#search.btn.btn-lg(type='button' value='Шукати')
+    .row
+        .col-xs-12
+            form
+                .form-group
+                    input#from.dropdown-toggle.form-control.input-lg(type='text', placeholder='Звідки')
+                    input#to.form-control.input-lg(type='text', placeholder='Куди')
+                    input#when.form-control.input-lg(type='text', placeholder='Коли')
+                    input#search.btn.btn-lg(type='button' value='Шукати')
 
-    table.table
-        thead
-            td № поїзда
-            td Звідки
-            td Куди
-            td Відправлення
-            td Прибуття
-            td Час в дорозі
-        tbody
+            table.table
+                thead
+                    td № поїзда
+                    td Звідки
+                    td Куди
+                    td Відправлення
+                    td Прибуття
+                    td Час в дорозі
+                tbody

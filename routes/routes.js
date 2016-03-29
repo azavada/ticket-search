@@ -4,7 +4,7 @@ var stationLoader = require('../api/station-loader');
 var ticketLoader = require('../api/ticket-loader');
 
 router.get('/', function(request, response, next) {
-    response.render('index', { title: 'Express' });
+    response.render('index', { title: 'Hakuna Matata' });
 });
 
 router.get('/api/station/:name', function(request, response, next) {
@@ -18,5 +18,10 @@ router.get('/api/tickets', function(request, response, next) {
         response.send(result);
     })
 });
+
+//if (express.get('env') === 'development') {
+//    var browserify = require('browserify-middleware');
+//    router.get('/bundle.js', browserify('./client/js/index.js'));
+//}
 
 module.exports = router;

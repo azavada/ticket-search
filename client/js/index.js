@@ -1,5 +1,16 @@
+var $ = require('jquery');
+require('bootstrap');
+require('bootstrap-datetime-picker');
+
+var AutoComplete = require('./auto-complete');
+
 $(function () {
     var autoComplete = new AutoComplete();
+    function enableDateTimePicker() {
+        $('#when').datetimepicker({
+            locale: 'ru'
+        });
+    }
 
     function addSearchButtonHandler() {
         $("#search").on("click", function () {
@@ -55,4 +66,5 @@ $(function () {
     autoComplete.add("#to");
 
     addSearchButtonHandler();
+    enableDateTimePicker();
 });

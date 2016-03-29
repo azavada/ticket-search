@@ -35,3 +35,7 @@ node_modules
 # IntelliJ IDEA
 *.idea
 *.iml
+
+# Generated files
+public/bundle.js
+public/style.css

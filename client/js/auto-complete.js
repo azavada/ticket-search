@@ -1,3 +1,6 @@
+var $ = require('jquery');
+require('jquery-ui');
+
 function AutoComplete() {
     var options = {
         source: source,
@@ -44,3 +47,5 @@ function AutoComplete() {
             ._renderItem = renderItem;
     }
 }
+
+module.exports = AutoComplete;
