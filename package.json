@@ -6,7 +6,7 @@
     "postinstall": "node ./scripts/postInstall.js",
     "browserify": "browserify ./client/js/index.js -o ./public/bundle.js",
     "watch": "watchify browser.js -o ./public/bundle.js --debug --verbose",
-    "test": "[ \"$NODE_ENV\" != development ] && pwd"
+    "test": ""
   },
   "repository": {
     "type": "git",
