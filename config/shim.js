@@ -9,7 +9,7 @@ module.exports = {
             "jquery": "jQuery"
         }
     },
-    "bootstrap-datetime-picker": {
+    "bootstrap-datepicker": {
         "depends": {
             "jquery": "jQuery"
         }

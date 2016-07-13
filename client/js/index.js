@@ -1,27 +1,40 @@
 var $ = require('jquery');
+require("jquery-ui");
 require('bootstrap');
-require('bootstrap-datetime-picker');
+require('bootstrap-datepicker');
+require('bootstrap-datepicker-ua');
 
 var AutoComplete = require('./auto-complete');
 
 $(function () {
     var autoComplete = new AutoComplete();
     function enableDateTimePicker() {
-        $('#when').datetimepicker({
-            locale: 'ru'
+        $.fn.bootstrapDP = $.fn.datepicker.noConflict();
+
+        $('#when').bootstrapDP({
+            format: "dd.mm.yyyy",
+            startDate: new Date(),
+            weekStart: 1,
+            todayBtn: true,
+            language: "uk",
+            autoclose: true,
+            todayHighlight: true,
+            toggleActive: true
         });
+
     }
 
     function addSearchButtonHandler() {
         $("#search").on("click", function () {
             var $from = $("#from");
             var $to = $("#to");
+            var $when = $('#when');
             var query = $.param({
                 from_id: $from.attr("data-value"),
                 from_name: $from.val(),
                 to_id: $to.attr("data-value"),
                 to_name: $to.val(),
-                when: getTodayDate()
+                when: $when.val()
             });
 
             $.ajax({

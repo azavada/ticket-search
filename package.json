@@ -5,7 +5,7 @@
     "start": "node ./bin/www",
     "postinstall": "node ./scripts/postInstall.js",
     "browserify": "browserify ./client/js/index.js -o ./public/bundle.js",
-    "watch": "watchify browser.js -o ./public/bundle.js --debug --verbose",
+    "watch": "watchify ./client/js/index.js -o ./public/bundle.js --debug --verbose",
     "test": ""
   },
   "repository": {
@@ -19,20 +19,20 @@
   "homepage": "https://github.com/azavada/ticket-search#readme",
   "browser": {
     "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
-    "bootstrap-datetime-picker": "./node_modules/bootstrap-datetime-picker/js/bootstrap-datetimepicker.js",
+    "bootstrap-datepicker": "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+    "bootstrap-datepicker-ua": "./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min.js",
     "jquery-ui": "./node_modules/jquery-ui-bundle/jquery-ui.js"
   },
-
   "browserify": {
-    "transform": [ "browserify-shim" ]
+    "transform": [
+      "browserify-shim"
+    ]
   },
-
   "browserify-shim": "./config/shim.js",
-
   "dependencies": {
     "body-parser": "~1.13.2",
     "bootstrap": "^3.3.6",
-    "bootstrap-datetime-picker": "^2.3.9",
+    "bootstrap-datepicker": "^1.6.1",
     "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
     "bundle-collapser": "^1.2.1",
