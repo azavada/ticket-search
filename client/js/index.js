@@ -40,16 +40,26 @@ $(function () {
             $.ajax({
                 url: 'api/tickets?' + query
             }).done(function (data) {
+                $(".table tbody").remove();
 
-                var table = $("tbody");
+                var table = $(".table");
+                var tbody = $("<tbody>").appendTo(table);
+
                 data.forEach(function(el) {
-                    var tr = $("<tr>").appendTo(table);
+                    var tr = $("<tr>").appendTo(tbody);
                     $("<td>").append(el.num).appendTo(tr);
                     $("<td>").append(el.from.station).appendTo(tr);
                     $("<td>").append(el.till.station).appendTo(tr);
                     $("<td>").append(el.from.src_date).appendTo(tr);
                     $("<td>").append(el.till.src_date).appendTo(tr);
                     $("<td>").append(el.travel_time).appendTo(tr);
+
+                    var seats = el.types.reduce(function (previousValue, currentValue, currentIndex) {
+                        var separator = currentIndex > 0 ? ", " : "";
+                        return  previousValue + separator + currentValue.letter + " - " + currentValue.places;
+                    },"");
+
+                    $("<td>").append(seats).appendTo(tr);
                 });
             });
         });
